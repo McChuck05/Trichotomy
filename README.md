@@ -13,7 +13,7 @@ The outfile is optional, but will contain just the code numbers in three columns
 
 Format:
 
-The first number in the program file (memory location 0) must be the address where the first instruction to be executed is located.
+The first number in the program file (memory location 0, the instruction pointer) must be the address where the first instruction to be executed is located.
 
     A B C    C = B - A
     A 0 C    If A <= 0, goto C
