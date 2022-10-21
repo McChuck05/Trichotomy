@@ -28,7 +28,7 @@ The first number in the program file (memory location 0) must be the address whe
     0 0 C    Pop the top of stack to C
     0 0 0    Halt
  
-Assembler instructions
+Parser/assembler instructions
 
      @        This address
      ?        The following address
