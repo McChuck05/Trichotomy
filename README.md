@@ -15,15 +15,14 @@ Format:
 
 The first number in the program file (memory location 0) must be the address where the first instruction to be executed is located.
 
- A B C    C = B - A
+    A B C    C = B - A
+    A 0 C    If A <= 0, goto C
  
- A 0 C    If A <= 0, goto C
+    0 B C    If B <= 0, call C
  
- 0 B C    If B <= 0, call C
+    0 B 0    If B <= 0, return.  Halt if the return stack is empty.
  
- 0 B 0    If B <= 0, return.  Halt if the return stack is empty.
- 
- A B 0    Perform I/O with A as a target and B as the format
+    A B 0    Perform I/O with A as a target and B as the format
  
              1:  Print A as a character
              
@@ -33,11 +32,11 @@ The first number in the program file (memory location 0) must be the address whe
              
              -2-:Input a character without echo, store its value in A
              
- A 0 0    Push A to the stack
+    A 0 0    Push A to the stack
  
- 0 0 C    Pop the top of stack to C
+    0 0 C    Pop the top of stack to C
  
- 0 0 0    Halt
+    0 0 0    Halt
  
 
 Assembler instructions
@@ -50,7 +49,7 @@ Assembler instructions
  
  \#       What follows is a comment
  
- *        Indirection.  Makes the following address negative.
+ \*        Indirection.  Makes the following address negative.
  
  " '      Quoted strings.  Can use the other mark inside.  Good form is to follow a string with a 0.
  
