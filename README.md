@@ -33,8 +33,8 @@ Parser/assembler instructions
      @        This address
      ?        The following address
      !        0, useful for indicating alternate functions
-     \#       What follows is a comment
-     \*        Indirection.  Makes the following address negative.
+     #       What follows is a comment
+     *        Indirection.  Makes the following address negative.
      " '      Quoted strings.  Can use the other mark inside.  Good form is to follow a string with a 0.
      .        Data marker.  Data is unformatted, where instructions are always three integers.
      :        At the end of a word creates a symbol, which the parser uses as an alias for an address.  
