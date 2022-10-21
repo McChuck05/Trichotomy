@@ -39,7 +39,7 @@ Assembler instructions
      .        Data marker.  Data is unformatted, where instructions are always three integers.
      :        At the end of a word creates a symbol, which the parser uses as an alias for an address.  
                   Note that symbols are used without the trailing colon.
-                  Example:   .Message1: ? "The quick brown fox jumps over the lazy dog."           
+                  Example:   .Message1: ? "The quick brown fox jumps over the lazy dog." 0          
      + -      Appended to a symbol allows simple math.  ? is equivalent to @+1.
      ZERO     An addressed value of 0, automatically added by the compiler if not already present.
      ;        Separates commands.
