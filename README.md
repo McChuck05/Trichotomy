@@ -20,10 +20,10 @@ The first number in the program file (memory location 0) must be the address whe
     0 B C    If B <= 0, call C
     0 B 0    If B <= 0, return.  Halt if the return stack is empty.
     A B 0    Perform I/O with A as a target and B as the format
-             1:  Print A as a character        
-             2+: Print A as a number            
-             -1: Input a character with echo, store its value in A         
-             -2-:Input a character without echo, store its value in A        
+                1:  Print A as a character        
+                2+: Print A as a number            
+                -1: Input a character with echo, store its value in A         
+                -2-:Input a character without echo, store its value in A        
     A 0 0    Push A to the stack
     0 0 C    Pop the top of stack to C
     0 0 0    Halt
@@ -53,12 +53,8 @@ Assembler instructions
                          1: print character  2: print number  -1: echo input character  -2: noecho input character                    
         /print A     Prints A as a character.  "/print A 2" will print A as a number.  Alternates:  /output /out   
         /input A     Inputs a character to A.  "/input A -2" will input without echo.  Alternate:  /in
-    
     /push A      Pushes A onto the stack.
-    
     /pop C       Pops the top of stack and stores it in C.
-    
     /halt        Unconditional program halt.
-    
     /copy B C    Equivalent to ZERO B C.  Alternate:  /move
     
