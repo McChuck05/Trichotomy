@@ -59,3 +59,6 @@ Parser/assembler instructions
     /halt        Unconditional program halt.
     /copy B C    Equivalent to ZERO B C.  Alternate:  /move
     
+    //import filename   Imports module filename.slm and appends its code to the main file.
+                        Do not include the ".slm" in the code, it is added automatically by the parser.
+                        Modules cannot import other modules.
