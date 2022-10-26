@@ -112,7 +112,7 @@ class Parser:
         stripped_tokens=[]
         stripped_tokens = [token.split() for token in string.split(';') if not '#' in token and token.strip()]
         if 'ZERO:' not in sum(stripped_tokens, start=[]):
-            stripped_tokens.append(['ZERO:', '0'])
+            stripped_tokens.append(['.', 'ZERO:', '0'])
         return stripped_tokens
 
 
