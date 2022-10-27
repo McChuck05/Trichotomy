@@ -1,0 +1,51 @@
+//import generics.slm as G
+Start
+% t1: 0, t2: 0, t3: 0
+% m1: -1, z: 0, p1: 1
+% data1_size: 60, data1_end: @+62, data1: ?
+/data 60
+% mult1: 5, mult2: -6, mult_total: 0
+% space: 32, cr: 10, equals: '='
+% add1: -1, sub1: 1, times: '*'
+Start:
+/push mult1
+/call G.SIGN
+/pop t1
+# /print t1 2; /print space
+/push mult2
+/call G.SIGN
+/pop t2
+# /print t2 2; /print space
+# /print cr
+/push mult1
+/push mult2
+/call G.MULT_SIGN
+/pop t1
+# /print t1 2; /print cr
+# /print mult1 2; /print space
+# /print mult2 2; /print cr
+/push msg1
+/call G.PRINT
+/print space
+/print mult1 2; /print space
+/print times; /print space
+/print mult2 2; /print cr
+/push mult1
+/push mult2
+/call G.MULTIPLY
+/pop mult_total
+/print mult1 2
+/print times
+/print mult2 2
+/print space
+/print equals
+/print space
+/print mult_total 2
+/print cr
+/halt
+% msg1: ? "Begin multiplying" 10 0
+
+
+
+
+

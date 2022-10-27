@@ -1,0 +1,10 @@
+# print module
+
+$PRINT:
+/pop $print_char
+$Print_Loop:
+/ret? *$print_char
+/print *$print_char 1
+M1 $print_char          # M1 is from main program
+/goto $Print_Loop
+% $print_char: 0

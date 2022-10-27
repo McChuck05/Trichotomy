@@ -1,0 +1,203 @@
+# genericly useful module
+
+% $p1: 1
+% $m1: -1
+% $z: 0
+% $temp1: 0, $temp2: 0, $temp3: 0
+% $true: -1  $false: 1, $space: 32
+% $sub1: 1, $add1: -1, $cr: 10
+
+
+$PRINT:                     # print character string terminated by 0
+/pop $print_char            # stack: A ->
+$Print_Loop:
+/ret? *$print_char
+/print *$print_char 1
+$m1 $print_char
+/goto $Print_Loop
+% $print_char: 0
+# END PRINT
+
+
+$NEGATE:                    # stack: A -> -A
+/pop $negate_1              # could use temp1, but this is faster and uses less memory
+$negate_1 $z $negate_1      # subtract from zero and store in self
+/push $negate_1             # no need to zeroize, pop will overwrite
+/ret
+% $negate_1: 0
+# END NEGATE                # This really isn't necessary.  It's a macro now.
+
+
+$ADD:                       # stack: A B -> A+B
+/pop $temp2                 # B
+/pop $temp1                 # A
+$temp1 $z $temp1            # negate A
+$temp1 $temp2               # B = B - (-A)
+/push $temp2
+$temp1                      # would be faster and use less memory to employ local variables here
+$temp2                      # zeroizing temporary variables
+/return
+# END ADD
+
+
+$ZERO?:                     # stack: A -> true (-1) or false (1)
+/push $zero_msg         ###
+/call $PRINT            ###
+/pop $zero_var
+/print $zero_var 2; /print $space   ###
+/goto? $zero_var $zero_negate
+/push $false
+/print $false 2; /print $cr         ###
+/return
+$zero_negate:
+/negate $zero_var
+/goto? $zero_var $zero_verified
+/push $false
+/print $false 2; /print $cr          ###
+/return
+$zero_verified:
+/push $true
+/print $true 2; /print $cr          ###
+/return
+% $zero_var: 0
+% $zero_msg: ? 10 "ZERO? " 0          ###
+# END ZERO?
+
+
+$SIGN:                      # stack: A -> 1, 0, or -1
+/push $sign_msg
+/call $PRINT
+/pop $sign_var
+/jmp? $sign_var $sign_neg0  # if not <=0, then positive
+/push $p1
+/print $p1 2; /print $cr
+/return
+$sign_neg0:
+/negate $sign_var
+/jmp? $sign_var $sign_0     # if not >=0, then negative
+/push $m1
+/print $m1 2; /print $cr
+/return
+$sign_0:
+/push $z                    # if not <>0, then zero
+/print $z 2; /print $cr
+/return
+% $sign_var: 0
+% $sign_msg: ? 10 "SIGN " 0
+# END SIGN
+
+
+$MULT_SIGN:                  # stack: A B -> 1, 0, or -1 based on multiplication rules of A*B
+/push $mults_msg            ###
+/call $PRINT                ###
+/pop $mults_1
+/pop $mults_2
+/goto? $mults_1 $mults_1neg0
+/goto? $mults_2 $mults_1pos_2neg0
+/push $p1                   # A pos, B pos
+/print $p1 2; /print $cr    ###
+/return
+$mults_1pos_2neg0:
+/negate $mults_2
+/goto? $mults_2 $mults_zero       # A pos, B zero
+/push $m1                   # A pos, B neg
+/print $m1 2; /print $cr
+/return
+$mults_1neg0:
+/negate $mults_1
+/goto? $mults_1 $mults_zero      # A zero, B unknown
+/goto? $mults_2 $mults_1neg_2neg0
+/push $m1                   # A neg, B pos
+/print $m1 2; /print $cr
+/return
+$mults_1neg_2neg0:
+/negate $mults_2
+/goto? $mults_2 $mults_zero     # A neg, B zero
+/push $p1                   # A neg, B neg
+/print $p1 2; /print $cr
+/return
+$mults_zero:
+/push $z
+/print $z 2; /print $cr
+/return
+% $mults_1: 0, $mults_2: 0
+% $mults_msg: ? 10 "MULTS " 0
+# END MULT_SIGN
+
+
+$ABS:                       # stack: A -> abs(A)
+/push $abs_msg; /call $PRINT
+/pop $abs_1
+/goto? $abs_1 $abs_neg0
+/push $abs_1                # A pos
+/print $abs_1 2; /print cr
+/ret
+$abs_neg0:
+/negate $abs_1              # A neg or zero, so change sign
+/push $abs_1
+/print $abs_1 2; /print cr
+/ret
+% $abs_1: 0
+% $abs_msg: ? "ABS " 0
+# END ABS
+
+
+$MULTIPLY:                  # stack: A B -> A*B
+/push $msg_mult_begin
+/call $PRINT
+/pop $mult_2
+/pop $mult_1
+/print $mult_1 2; /print $space
+/print $mult_2 2; /print $cr
+/push $mult_1
+/push $mult_2
+/call $MULT_SIGN
+/pop $mult_sign
+/push $mult_sign
+/call $ZERO?
+/pop $mult_zero
+/goto? $mult_zero $mult0
+/print $mult_1 2; /print $space
+/print $mult_2 2; /print $cr
+/push $mult_1
+/call $ABS
+/pop $mult_1
+/push $mult_2
+/call $ABS
+/pop $mult_2
+/negate $mult_1
+/push $msg_mult_add
+/call $PRINT
+
+$mult_add_loop:
+$mult_1 $mult_total
+/print $mult_total 2; /print $space ###
+$sub1 $mult_2
+/goto $mult_2 $mult_finish
+/goto $mult_add_loop
+
+$mult_finish:
+/print $cr    ###
+/negate $mult_sign
+/goto? $mult_sign $mult_out  # sign is positive
+/negate $mult_total         # sign is negative
+$mult_out: /push $mult_total
+/print $mult_total 2; /print $cr    ###
+$mult_total
+/return
+
+$mult0:
+/push $msg_mult_zero
+/call $PRINT
+/print $z 2; /print $cr         ###
+/push $z
+/return
+
+% $mult_1: 0, $mult_2: 0, $mult_sign: 0, $mult_zero: 0, $mult_total: 0
+% $msg_mult_begin: ? "Begin multiplication" 10 0
+% $msg_mult_add: ? "Adding " 0
+% $msg_mult_zero: ? "Zero " 0
+
+# END MULTIPLY
+
+

@@ -1,0 +1,49 @@
+# Trichotomy test 2
+
+//import print.slm
+//import generics.slm as gen
+
+START
+% Z: 0
+% M1: -1
+% P1: 1
+% space: 32
+% cr: 10
+% in1: 0
+
+START:
+/push msg1
+/call PRINT
+/push msg2
+/call? Z PRINT
+/print cr
+/push msg3; /call gen.PRINT
+/print space
+/input in1
+/print cr
+/print in1
+cr 1  !         # print carriage return
+/push msg4
+/call gen.PRINT
+/print space
+/print in1 2    # print as number
+/print cr
+/push msg5; /call gen.PRINT
+/print space
+/push P1
+/call gen.NEGATE
+/pop M1
+/print M1 2     # print as number
+/print space
+/negate in1
+/print in1 2
+/print space
+msg5 ! !; ! Z gen.PRINT     # /push msg5; /call gen.PRINT
+/halt
+
+% msg1: ? "Good morning, starshine!" 32 32 0
+% msg2: ? 'The earth says, "Hello!"' 10 0
+% msg3: ? "Please hit the any key:" 0
+% msg4: @+1 "The ASCII for that character is:" 0
+% msg5: ? "This is repetitive." 0
+
