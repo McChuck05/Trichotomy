@@ -63,7 +63,7 @@ Parser/assembler instructions
                         Modules cannot import other modules.
     //import filename as handle     Replaces every instance of '$' in the code of the module with 'handle.' 
                             to avoid symbol duplication.
-                        example:  "import testmod.slm as Test" will rename "$function_test" in the module
+                        Example:  "import testmod.slm as Test" will rename "$function_test" in the module
                             to "Test.function_test".
-                        if no "as handle" is given, each '$' in the module code (not literals) 
+                        If no "as handle" is given, each '$' in the module code (not literals) 
                             will be stripped off, so "$function_test" would become "function_test".
