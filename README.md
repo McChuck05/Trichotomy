@@ -51,7 +51,7 @@ Parser/assembler instructions
         /call B C    If B is omitted, ZERO is inserted to make the branch mandatory.  Alternates: /call? /jsr /jsr? 
         /return B    If B is omitted, ZERO is inserted to make the branch mandatory.  Alternate: /return? /ret /ret? 
         /io A B      Perform input or output with A as target and B as format.  Alternate:  /inout
-                         1: print character  2: print number  -1: echo input character  -2: noecho input character                    
+                         1: print character  2: print number  -1: echo input character  -2: noecho input character
         /print A     Prints A as a character.  "/print A 2" will print A as a number.  Alternates:  /output /out   
         /input A     Inputs a character to A.  "/input A -2" will input without echo.  Alternate:  /in
     /push A      Pushes A onto the stack.
