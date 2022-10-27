@@ -36,7 +36,7 @@ Parser/assembler instructions
      #        What follows is a comment
      *        Indirection.  Makes the following address negative.
      " '      Quoted strings.  Can use the other mark inside.  Good form is to follow a string with a 0.
-     .        Data marker.  Data is unformatted, where instructions are always three integers.
+     %        Data marker.  Data is unformatted, where instructions are always three integers.
      :        At the end of a word creates a symbol, which the parser uses as an alias for an address.  
                   Note that symbols are used without the trailing colon.
                   Example:   .Message1: ? "The quick brown fox jumps over the lazy dog." 0          
@@ -59,6 +59,8 @@ Parser/assembler instructions
     /halt        Unconditional program halt.
     /copy B C    Equivalent to ZERO B C.  Alternate:  /move
     
-    //import filename   Imports module filename.slm and appends its code to the main file.
-                        Do not include the ".slm" in the code, it is added automatically by the parser.
+    //import filename   Imports module filename and appends its code to the main file.
                         Modules cannot import other modules.
+    //import filename as handle     Replaces every instance of '$' in the code of the module with 'handle' to avoid symbol duplication.
+                        example:  "import testmod.slm as Test" will rename "$function_test" in the module to "Test.function_test"
+                        if no "as handle" is given, '$' in the module code will be stripped off, so "$function_test" would become "function_test".
