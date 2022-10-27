@@ -61,7 +61,7 @@ Parser/assembler instructions
     
     //import filename   Imports module filename and appends its code to the main file.
                         Modules cannot import other modules.
-    //import filename as handle     Replaces every instance of '$' in the code of the module with 'handle' 
+    //import filename as handle     Replaces every instance of '$' in the code of the module with 'handle.' 
                             to avoid symbol duplication.
                         example:  "import testmod.slm as Test" will rename "$function_test" in the module
                             to "Test.function_test".
