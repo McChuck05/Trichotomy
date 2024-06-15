@@ -60,7 +60,7 @@ def main(args):
             if os.path.isfile(args[1]):
                 print(args[1], "exists.  Overwrite? ", end="", flush=True)
                 answer = getche()
-                if answer in ["y", "Y"]:
+                if answer in [b'y', b'Y']:
                     print()
                     print(args[1], "replaced \n\n", flush=True)
                     Trichotomy(args)
