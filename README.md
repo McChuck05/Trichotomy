@@ -7,6 +7,7 @@ See the Trichotomy page on the Esolangs wiki for detailed information.
 https://esolangs.org/wiki/Trichotomy
 
 Usage:  python trichotomy.py infile (outfile)
+Note:  Requires Python 3.10 or later!
 
 The outfile is optional, but will contain just the code numbers in three columns, with addresses.  It will prompt you if an existing outfile is named.
 
